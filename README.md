@@ -1,12 +1,12 @@
-= Server Side Events Demo
+# Server Side Events Demo
 
 A demo for using server side events with Rails.
 
-== Installation
+## Installation
 
 Clone the project, `cd` it and `bundle install`.
 
-== Usage
+## Usage
 
 `[RAILS_CACHE_CLASSES=true] rails s`
 
