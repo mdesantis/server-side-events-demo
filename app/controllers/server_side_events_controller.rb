@@ -1,10 +1,10 @@
 class ServerSideEventsController < ApplicationController
   include ActionController::Live
 
-  def test
+  def index
   end
 
-  def stream
+  def current_time
     sse_response do |sse|
       loop do
         sse.write(Time.now, { option: 'option' })

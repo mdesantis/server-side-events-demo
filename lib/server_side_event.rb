@@ -6,9 +6,7 @@ class ServerSideEvent
   def initialize(io, &block)
     @io = io
 
-    if block_given?
-      open &block
-    end
+    open &block if block_given?
   end
 
   def open
