@@ -1,4 +1,17 @@
 class ServerSideEvent
+  module Helper
+    def sse?
+      params[:_sse] == 'true'
+    end
+
+    def respond_using_sse(&block)
+      response.headers['Content-Type']  = 'text/event-stream'
+      response.headers['Cache-Control'] = 'no-cache'
+
+      ServerSideEvent.respond response, &block
+    end
+  end
+
   def self.respond(response, &block)
     new(response.stream, &block)
   end
