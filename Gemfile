@@ -41,7 +41,7 @@ gem 'spring', group: :development
 # gem 'debugger', group: [:development, :test]
 
 # Multi-threaded application server
-gem 'puma'
+gem 'unicorn'
 # Connection timeout (Puma does not support timeout)
 gem 'rack-timeout'
 
