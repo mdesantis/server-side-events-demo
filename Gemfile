@@ -40,9 +40,12 @@ gem 'spring', group: :development
 
 # Multi-threaded application server
 gem 'puma'
-
-# Heroku support
-gem 'rails_12factor', group: :production
-
 # Connection timeout (Puma does not support timeout)
 gem 'rack-timeout'
+
+group :production do
+  # Heroku support
+  gem 'rails_12factor'
+  # Monitoring
+  gem 'newrelic_rpm'
+end

@@ -60,6 +60,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.4.0)
     multi_json (1.10.1)
+    newrelic_rpm (3.9.0.229)
     pg (0.17.1)
     polyglot (0.3.5)
     puma (2.8.2)
@@ -136,6 +137,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails
+  newrelic_rpm
   pg
   puma
   rack-timeout
