@@ -43,3 +43,6 @@ gem 'puma'
 
 # Heroku support
 gem 'rails_12factor', group: :production
+
+# Connection timeout (Puma does not support timeout)
+gem 'rack-timeout'
