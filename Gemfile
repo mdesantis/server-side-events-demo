@@ -42,8 +42,6 @@ gem 'spring', group: :development
 
 # Multi-threaded application server
 gem 'unicorn'
-# Connection timeout (Puma does not support timeout)
-gem 'rack-timeout'
 
 group :production do
   # Heroku support
