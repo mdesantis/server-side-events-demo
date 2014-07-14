@@ -1,0 +1,1 @@
+GC::Profiler.enable if ENV['RAILS_GC_PROFILER'] == 'true'
