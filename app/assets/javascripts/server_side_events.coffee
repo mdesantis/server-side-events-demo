@@ -6,8 +6,7 @@ on_page_load = ->
     $('#status').text('Status: online')
 
     eventSource.onmessage = (e) ->
-      $('#current_time').append $ '<pre/>', text: JSON.parse(e.data).time
-      $('html, body').scrollTop $(document).height() unless Modernizr.touch
+      $('#current_time').prepend $ '<pre/>', text: JSON.parse(e.data).time
 
     eventSource.onerror = (e) ->
       $('#status').text('Status: offline')
