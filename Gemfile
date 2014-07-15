@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 
-ruby(ENV['RUBY_VERSION'] || ENV['RBENV_VERSION'] || '2.1.2')
+ruby_version        = ENV['RUBY_VERSION']        || '2.1.2'
+ruby_engine         = ENV['RUBY_ENGINE']         || 'ruby'
+ruby_engine_version = ENV['RUBY_ENGINE_VERSION'] || '2.1.2'
+
+ruby ruby_version, engine: ruby_engine, engine_version: ruby_engine_version
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
