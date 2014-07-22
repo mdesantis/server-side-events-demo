@@ -21,9 +21,14 @@ class ServerSideEventsController < ApplicationController
     response.headers['Content-Type'] = 'text/event-stream'
     sse = SSE.new(response.stream)
 
+    timeout = params[:timeout].try(:to_i)
+    elapsed = 0
+
     loop do
       sse.write(time: Time.now)
-      sleep 1
+      elapsed += (sleep 1)
+
+      break if timeout && elapsed >= timeout
     end
 
   rescue IOError => e

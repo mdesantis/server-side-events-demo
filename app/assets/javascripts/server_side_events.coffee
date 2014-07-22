@@ -1,6 +1,9 @@
 on_page_load = ->
   if $('#current_time').length > 0
-    eventSource = new EventSource "#{window.settings.paths.server_side_events_current_time}?_sse=true"
+
+    url = "#{window.settings.paths.server_side_events_current_time}?_sse=true"
+    url += "&#{location.search.slice(1)}" if location.search.length > 0
+    eventSource = new EventSource url
 
     eventSource.onopen = (e) ->
       console.log e
