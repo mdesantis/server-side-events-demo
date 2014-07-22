@@ -8,15 +8,17 @@ class ServerSideEventsController < ApplicationController
   def current_time
     respond_to do |format|
       format.html do
-        current_time_sse if sse?
+        sse_current_time if sse?
       end
       format.sse do
-        current_time_sse
+        sse_current_time
       end
     end
   end
 
-  def current_time_sse
+  private
+
+  def sse_current_time
     response.headers['Content-Type'] = 'text/event-stream'
     sse = SSE.new(response.stream)
 
@@ -28,13 +30,13 @@ class ServerSideEventsController < ApplicationController
   rescue IOError => e
     raise e unless e.message == 'closed stream'
 
-    logger.info closed_sse_stream_message(request)
+    logger.info sse_closed_stream_message(request)
   ensure
     sse.close
   end
 
   # Closed SSE stream GET "/session/new" for 127.0.0.1 at 2012-09-26 14:51:42 -0700
-  def closed_sse_stream_message(request)
+  def sse_closed_stream_message(request)
     '  Closed SSE stream %s "%s" for %s at %s' % [
       request.request_method,
       request.filtered_path,
