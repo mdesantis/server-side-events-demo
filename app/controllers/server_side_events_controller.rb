@@ -1,6 +1,5 @@
 class ServerSideEventsController < ApplicationController
   include ActionController::Live
-  include ServerSideEvent::Helper
 
   def index
   end
@@ -42,5 +41,9 @@ class ServerSideEventsController < ApplicationController
       request.filtered_path,
       request.ip,
       Time.now.to_default_s ]
+  end
+
+  def sse?
+    params[:_sse] == 'true'
   end
 end
