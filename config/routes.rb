@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   namespace :server_side_events do
-    get ''             , action: :index
-    get 'current_time'
+    get  ''             , action: :index
+    get  'current_time'
+    get  'events'
+    get  'fire_event'
   end
 
   root 'server_side_events#index'

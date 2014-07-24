@@ -1,1 +1,3 @@
-window.settings = <%= JavascriptSettings.new.to_json %>
+function windowSettings() {
+  window.settings = <%= JavascriptSettings.new.to_json %>
+}

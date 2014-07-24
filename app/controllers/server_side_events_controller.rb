@@ -6,16 +6,42 @@ class ServerSideEventsController < ApplicationController
 
   def current_time
     respond_to do |format|
-      format.html do
-        sse_current_time if sse?
-      end
-      format.sse do
-        sse_current_time
-      end
+      format.html { sse_current_time if sse? }
+      format.sse  { sse_current_time }
     end
   end
 
+  def events
+    respond_to do |format|
+      format.html { sse_events if sse? }
+      format.sse  { sse_events }
+    end
+  end
+
+  def fire_event
+    ActiveSupport::Notifications.instrument('sse_event')
+
+    render nothing: true
+  end
+
   private
+
+  def sse_events
+    response.headers['Content-Type'] = 'text/event-stream'
+    sse = SSE.new(response.stream)
+
+    ActiveSupport::Notifications.subscribe('sse_event') do |*args|
+      sse.write message: 'event received'
+    end
+
+    loop { }
+  rescue IOError => e
+    raise e unless e.message == 'closed stream'
+
+    logger.info sse_closed_stream_message(request)
+  ensure
+    sse.close
+  end
 
   def sse_current_time
     response.headers['Content-Type'] = 'text/event-stream'
@@ -25,7 +51,7 @@ class ServerSideEventsController < ApplicationController
     elapsed = 0
 
     loop do
-      sse.write(time: Time.now)
+      sse.write time: Time.now
       elapsed += (sleep 1)
 
       break if timeout && elapsed >= timeout
