@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby_version        = ENV['RUBY_VERSION']        || '2.1.2'
 ruby_engine         = ENV['RUBY_ENGINE']         || 'ruby'
+ruby_version        = ENV['RUBY_VERSION']        || '2.1.2'
 ruby_engine_version = ENV['RUBY_ENGINE_VERSION'] || '2.1.2'
 
 ruby ruby_version, engine: ruby_engine, engine_version: ruby_engine_version
