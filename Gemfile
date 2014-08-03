@@ -48,8 +48,6 @@ gem 'spring', group: :development
 gem 'puma'
 # Connection timeout (Puma does not support timeout)
 gem 'rack-timeout'
-# Event-driven IO system
-gem 'celluloid-io'
 
 group :production do
   # Heroku support
