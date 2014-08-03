@@ -30,11 +30,13 @@ class ServerSideEventsController < ApplicationController
     response.headers['Content-Type'] = 'text/event-stream'
     sse = SSE.new(response.stream)
 
+    sse.write message: 'starting'
+
     ActiveSupport::Notifications.subscribe('sse_event') do |*args|
       sse.write message: 'event received'
     end
 
-    loop { }
+    sleep
   rescue IOError => e
     raise e unless e.message == 'closed stream'
 

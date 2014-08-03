@@ -21,7 +21,7 @@ on_page_load = ->
 
     eventSource.onmessage = (e) ->
       console.log e
-      $('#stream').prepend $ '<pre/>', text: JSON.parse(e.data).time
+      $('#stream').prepend $ '<pre/>', text: JSON.stringify(e.data)
 
     eventSource.onerror = (e) ->
       console.log e
